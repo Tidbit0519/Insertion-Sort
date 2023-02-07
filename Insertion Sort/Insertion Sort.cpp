@@ -24,30 +24,26 @@ void printIdOnly() {
     {
         cout << person.getId() << " ";
     }
+    cout << endl;
 }
 
 // Insertion Sort algorithm
-//INSERTION - SORT(A, n) cost times 
-//1 for i = 2 to n
-//2 key = A[i] 
-//3 // Insert A[i] into the sorted subarray A[1 : i – 1].  
-//4 j = i – 1 
-//5 while j > 0 and A[j] > key 
-//6 A[j + 1] = A[j]  
-//7 j = j – 1 c7 8 A[j + 1] = key
-
 void insertionSort() {
-    for (int i = 1; i < record.size(); i++)
-    {
-        int key = record[i].getId();
+    // starting from the second index down to the last index.
+    for (int i = 1; i < record.size(); i++) {
+        // key is used as comparison
+        Person key = record[i];
+        // j is the one before key
         int j = i - 1;
-        while (j>0 && record[j].getId()>key)
-        {
+        // Swaps j and key if the id of j is larger than the id of key.
+        while (j >= 0 && record[j].getId() > key.getId()) {
             comparisons += 1;
-            record[j + 1] = record[j];
+            swap(record[j + 1], record[j]);
             j = j - 1;
         }
-        record[j + 1] = record[key];
+        // printIdOnly();
+        // Moves the key pointer to the next index if id of j is not larger than the id of key.
+        record[j + 1] = key;
     }
 }
 
@@ -116,9 +112,7 @@ int main(int argc, char** argv) {
         Person employee(name, id, age, job, hireyear);
         record.push_back(employee);
     }
-
     insertionSort();
-    printIdOnly();
     cout << "It took " << comparisons << " comparisons to sort this list.";
     //writeToFile();
 }
